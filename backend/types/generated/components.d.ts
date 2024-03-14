@@ -18,11 +18,13 @@ export interface LayoutHeroSection extends Schema.Component {
   info: {
     displayName: 'Hero Section';
     icon: 'layout';
+    description: '';
   };
   attributes: {
     heading: Attribute.String;
     subHeading: Attribute.Text;
     image: Attribute.Media;
+    link: Attribute.Component<'components.link'>;
   };
 }
 

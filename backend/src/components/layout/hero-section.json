@@ -2,7 +2,8 @@
   "collectionName": "components_layout_hero_sections",
   "info": {
     "displayName": "Hero Section",
-    "icon": "layout"
+    "icon": "layout",
+    "description": ""
   },
   "options": {},
   "attributes": {
@@ -13,11 +14,17 @@
       "type": "text"
     },
     "image": {
+      "type": "media",
+      "multiple": false,
+      "required": false,
       "allowedTypes": [
         "images"
-      ],
-      "type": "media",
-      "multiple": false
+      ]
+    },
+    "link": {
+      "type": "component",
+      "repeatable": false,
+      "component": "components.link"
     }
   }
 }
