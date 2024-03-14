@@ -1,6 +1,7 @@
 import qs from "qs";
 
 import { flattenAttributes } from "@/lib/utils";
+import { HeroSection } from "@/components/customs/HeroSection";
 
 const homePageQuery = qs.stringify({
   populate: {
@@ -23,7 +24,7 @@ async function getStrapiData(path: string) {
   url.search = homePageQuery;
 
   try {
-    const response = await fetch(url.href);
+    const response = await fetch(url.href, { cache: "no-store" });
     const data = await response.json();
     const flattenedData = flattenAttributes(data);
 
@@ -36,12 +37,11 @@ async function getStrapiData(path: string) {
 export default async function Home() {
   const strapiData = await getStrapiData("/api/home-page");
 
-  const { title, description } = strapiData;
+  const { blocks } = strapiData;
 
   return (
-    <main className="container mx-auto py-6">
-      <h1 className="text-5xl font-bold">{title}</h1>
-      <p className="text-xl mt-4">{description}</p>
+    <main>
+      <HeroSection data={blocks[0]} />
     </main>
   );
 }
