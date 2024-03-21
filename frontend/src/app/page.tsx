@@ -22,6 +22,17 @@ const homePageQuery = qs.stringify({
   },
 });
 
+function blockRenderer(block: any) {
+  switch (block.__component) {
+    case "layout.hero-section":
+      return <HeroSection key={block.id} data={block} />;
+    case "layout.features-section":
+      return <FeaturesSection key={block.id} data={block} />;
+    default:
+      return null;
+  }
+}
+
 async function getStrapiData(path: string) {
   const baseUrl = getStrapiURL();
   const url = new URL(path, baseUrl);
@@ -43,11 +54,7 @@ export default async function Home() {
   const strapiData = await getStrapiData("/api/home-page");
 
   const { blocks } = strapiData;
+  if (!blocks) return <p>No sections found</p>;
 
-  return (
-    <main>
-      <HeroSection data={blocks[0]} />
-      <FeaturesSection data={blocks[1]} />
-    </main>
-  );
+  return <main>{blocks.map(blockRenderer)}</main>;
 }
