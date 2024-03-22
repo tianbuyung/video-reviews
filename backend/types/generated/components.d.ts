@@ -39,6 +39,19 @@ export interface LayoutFeaturesSection extends Schema.Component {
   };
 }
 
+export interface LayoutFooter extends Schema.Component {
+  collectionName: 'components_layout_footers';
+  info: {
+    displayName: 'Footer';
+    icon: 'arrowDown';
+  };
+  attributes: {
+    logoText: Attribute.Component<'components.link'>;
+    text: Attribute.Text;
+    socialLink: Attribute.Component<'components.link', true>;
+  };
+}
+
 export interface LayoutHeader extends Schema.Component {
   collectionName: 'components_layout_headers';
   info: {
@@ -72,6 +85,7 @@ declare module '@strapi/types' {
       'components.feature': ComponentsFeature;
       'components.link': ComponentsLink;
       'layout.features-section': LayoutFeaturesSection;
+      'layout.footer': LayoutFooter;
       'layout.header': LayoutHeader;
       'layout.hero-section': LayoutHeroSection;
     }

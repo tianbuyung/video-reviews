@@ -803,6 +803,7 @@ export interface ApiGlobalGlobal extends Schema.SingleType {
     title: Attribute.String;
     description: Attribute.Text;
     header: Attribute.Component<'layout.header'>;
+    footer: Attribute.Component<'layout.footer'>;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;
