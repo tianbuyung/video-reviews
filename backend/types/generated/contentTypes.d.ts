@@ -794,6 +794,7 @@ export interface ApiGlobalGlobal extends Schema.SingleType {
     singularName: 'global';
     pluralName: 'globals';
     displayName: 'Global';
+    description: '';
   };
   options: {
     draftAndPublish: true;
@@ -801,6 +802,7 @@ export interface ApiGlobalGlobal extends Schema.SingleType {
   attributes: {
     title: Attribute.String;
     description: Attribute.Text;
+    header: Attribute.Component<'layout.header'>;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;
