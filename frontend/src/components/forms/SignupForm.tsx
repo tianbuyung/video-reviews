@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import { useFormState } from "react-dom";
 
 import {
   CardTitle,
@@ -15,10 +16,21 @@ import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { registerUserAction } from "@/data/actions/auth-actions";
 
+const INITIAL_STATE = {
+  data: "hello you wonderful people",
+};
+
 export function SignupForm() {
+  const [formState, formAction] = useFormState(
+    registerUserAction,
+    INITIAL_STATE
+  );
+
+  console.log(formState, "client");
+
   return (
     <div className="w-full max-w-md">
-      <form action={registerUserAction}>
+      <form action={formAction}>
         <Card>
           <CardHeader className="space-y-1">
             <CardTitle className="text-3xl font-bold">Sign Up</CardTitle>
