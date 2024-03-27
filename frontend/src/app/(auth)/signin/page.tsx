@@ -1,5 +1,5 @@
-import React from "react";
+import { SigninForm } from "@/components/forms/SigninForm";
 
 export default function SignInRoute() {
-  return <div>Sign In Route</div>;
+  return <SigninForm />;
 }
