@@ -13,10 +13,10 @@ import {
 } from "@/components/ui/card";
 import { Label } from "@/components/ui/label";
 import { Input } from "@/components/ui/input";
-import { Button } from "@/components/ui/button";
 import { registerUserAction } from "@/data/actions/auth-actions";
 import { ZodErrors } from "@/components/customs/ZodErrors";
 import { StrapiErrors } from "@/components/customs/StrapiErrors";
+import { SubmitButton } from "@/components/customs/SubmitButton";
 
 const INITIAL_STATE = {
   data: null,
@@ -86,9 +86,11 @@ export function SignupForm() {
           </CardContent>
 
           <CardFooter className="flex flex-col">
-            <Button type="submit" className="w-full">
-              Sign Up
-            </Button>
+            <SubmitButton
+              className="w-full"
+              text="Sign Up"
+              loadingText="Loading"
+            />
 
             <StrapiErrors error={formState?.strapiErrors} />
           </CardFooter>
