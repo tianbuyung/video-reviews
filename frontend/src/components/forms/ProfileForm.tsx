@@ -2,10 +2,19 @@
 
 import React from "react";
 import { cn } from "@/lib/utils";
+import { useFormState } from "react-dom";
 
 import { SubmitButton } from "@/components/customs/SubmitButton";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
+import { updateProfileAction } from "@/data/actions/profile-actions";
+import { StrapiErrors } from "@/components/customs/StrapiErrors";
+
+const INITIAL_STATE = {
+  data: null,
+  strapiErrors: null,
+  message: null,
+};
 
 interface ProfileFormProps {
   id: string;
@@ -34,8 +43,15 @@ export function ProfileForm({
   readonly data: ProfileFormProps;
   readonly className?: string;
 }) {
+  const updateProfileWithId = updateProfileAction.bind(null, data.id);
+
+  const [formState, formAction] = useFormState(
+    updateProfileWithId,
+    INITIAL_STATE
+  );
+
   return (
-    <form className={cn("space-y-4", className)}>
+    <form className={cn("space-y-4", className)} action={formAction}>
       <div className="space-y-4 grid ">
         <div className="grid grid-cols-3 gap-4">
           <Input
@@ -81,6 +97,7 @@ export function ProfileForm({
       <div className="flex justify-end">
         <SubmitButton text="Update Profile" loadingText="Saving Profile" />
       </div>
+      <StrapiErrors error={formState?.strapiErrors} />
     </form>
   );
 }
