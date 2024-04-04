@@ -29,8 +29,7 @@ export function SignupForm() {
     registerUserAction,
     INITIAL_STATE
   );
-
-  console.log(formState, "client");
+  // console.log(formState, "client");
 
   return (
     <div className="w-full max-w-md">
