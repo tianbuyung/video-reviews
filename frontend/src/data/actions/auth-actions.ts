@@ -30,7 +30,7 @@ const schemaRegister = z.object({
 });
 
 export async function registerUserAction(prevState: any, formData: FormData) {
-  console.log("Hello From Register User Action");
+  // console.log("Hello From Register User Action");
 
   const validatedFields = schemaRegister.safeParse({
     username: formData.get("username"),
