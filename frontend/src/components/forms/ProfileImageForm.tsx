@@ -26,9 +26,11 @@ const initialState = {
 export function ProfileImageForm({
   data,
   className,
+  priority,
 }: {
   data: Readonly<ProfileImageFormProps>;
   className?: string;
+  priority?: boolean;
 }) {
   const uploadProfileImageWithIdAction = uploadProfileImageAction.bind(
     null,
@@ -48,6 +50,7 @@ export function ProfileImageForm({
           name="image"
           label="Profile Image"
           defaultValue={data?.url || ""}
+          priority={priority}
         />
         <ZodErrors error={formState.zodErrors?.image} />
         <StrapiErrors error={formState.strapiErrors} />

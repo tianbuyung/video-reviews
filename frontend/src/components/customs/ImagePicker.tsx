@@ -12,6 +12,7 @@ interface ImagePickerProps {
   label: string;
   showCard?: boolean;
   defaultValue?: string;
+  priority?: boolean;
 }
 
 function generateDataUrl(file: File, callback: (imageUrl: string) => void) {
@@ -20,7 +21,13 @@ function generateDataUrl(file: File, callback: (imageUrl: string) => void) {
   reader.readAsDataURL(file);
 }
 
-function ImagePreview({ dataUrl }: { readonly dataUrl: string }) {
+function ImagePreview({
+  dataUrl,
+  priority,
+}: {
+  readonly dataUrl: string;
+  readonly priority?: boolean;
+}) {
   return (
     <StrapiImage
       src={dataUrl}
@@ -28,6 +35,7 @@ function ImagePreview({ dataUrl }: { readonly dataUrl: string }) {
       height={200}
       width={200}
       className="rounded-lg w-full object-cover"
+      priority={priority}
     />
   );
 }
@@ -35,12 +43,14 @@ function ImagePreview({ dataUrl }: { readonly dataUrl: string }) {
 function ImageCard({
   dataUrl,
   fileInput,
+  priority,
 }: {
   readonly dataUrl: string;
   readonly fileInput: React.RefObject<HTMLInputElement>;
+  readonly priority?: boolean;
 }) {
   const imagePreview = dataUrl ? (
-    <ImagePreview dataUrl={dataUrl} />
+    <ImagePreview dataUrl={dataUrl} priority={priority} />
   ) : (
     <p>No image selected</p>
   );
@@ -64,6 +74,7 @@ export default function ImagePicker({
   name,
   label,
   defaultValue,
+  priority,
 }: Readonly<ImagePickerProps>) {
   const fileInput = useRef<HTMLInputElement>(null);
   const [dataUrl, setDataUrl] = useState<string | null>(defaultValue ?? null);
@@ -86,7 +97,11 @@ export default function ImagePicker({
           accept="image/*"
         />
       </div>
-      <ImageCard dataUrl={dataUrl ?? ""} fileInput={fileInput} />
+      <ImageCard
+        dataUrl={dataUrl ?? ""}
+        fileInput={fileInput}
+        priority={priority}
+      />
     </React.Fragment>
   );
 }
