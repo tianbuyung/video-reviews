@@ -1,5 +1,6 @@
-import { logoutAction } from "@/data/actions/auth-actions";
 import { LogOut } from "lucide-react";
+
+import { logoutAction } from "@/data/actions/auth-actions";
 
 export function LogoutButton() {
   return (
