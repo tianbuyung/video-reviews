@@ -1,10 +1,11 @@
 "use client";
 
 import React, { useState, useRef } from "react";
-import { StrapiImage } from "./StrapiImage";
 
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
+
+import { StrapiImage } from "./StrapiImage";
 
 interface ImagePickerProps {
   id: string;
