@@ -1,4 +1,5 @@
 "use client";
+
 import ReactPlayer from "react-player/youtube";
 
 function generateYouTubeUrl(videoId: string) {
