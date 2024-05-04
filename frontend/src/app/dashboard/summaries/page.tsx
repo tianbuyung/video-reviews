@@ -29,9 +29,20 @@ function LinkCard({ id, title, summary }: Readonly<LinkCardProps>) {
   );
 }
 
-export default async function SummariesRoute() {
-  const { data } = await getSummaries();
+interface SearchParamsProps {
+  searchParams?: {
+    query?: string;
+  };
+}
+
+export default async function SummariesRoute({
+  searchParams,
+}: Readonly<SearchParamsProps>) {
+  const query = searchParams?.query ?? "";
+  const { data } = await getSummaries(query);
+
   if (!data) return null;
+
   return (
     <div className="grid grid-cols-1 gap-4 p-4">
       <Search />

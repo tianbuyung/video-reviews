@@ -19,6 +19,7 @@ async function fetchData(url: string) {
   try {
     const response = await fetch(url, authToken ? headers : {});
     const data = await response.json();
+
     return flattenAttributes(data);
   } catch (error) {
     console.error("Error fetching data:", error);
@@ -75,8 +76,20 @@ export async function getGlobalPageMetadata() {
   return await fetchData(url.href);
 }
 
-export async function getSummaries() {
+export async function getSummaries(queryString: string) {
+  const query = qs.stringify({
+    sort: ["createdAt:desc"],
+    filters: {
+      $or: [
+        { title: { $containsi: queryString } },
+        { summary: { $containsi: queryString } },
+      ],
+    },
+  });
   const url = new URL("/api/summaries", baseUrl);
+
+  url.search = query;
+
   return fetchData(url.href);
 }
 
