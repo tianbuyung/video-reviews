@@ -2,6 +2,7 @@ import Link from "next/link";
 
 import { getSummaries } from "@/data/loaders";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Search } from "@/components/customs/Search";
 
 interface LinkCardProps {
   id: string;
@@ -33,6 +34,7 @@ export default async function SummariesRoute() {
   if (!data) return null;
   return (
     <div className="grid grid-cols-1 gap-4 p-4">
+      <Search />
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
         {data.map((item: LinkCardProps) => (
           <LinkCard key={item.id} {...item} />
