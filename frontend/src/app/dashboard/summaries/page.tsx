@@ -2,6 +2,8 @@ import Link from "next/link";
 
 import { getSummaries } from "@/data/loaders";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Search } from "@/components/customs/Search";
+import { PaginationComponent } from "@/components/customs/Pagination";
 
 interface LinkCardProps {
   id: string;
@@ -28,16 +30,33 @@ function LinkCard({ id, title, summary }: Readonly<LinkCardProps>) {
   );
 }
 
-export default async function SummariesRoute() {
-  const { data } = await getSummaries();
+interface SearchParamsProps {
+  searchParams?: {
+    query?: string;
+    page?: string;
+  };
+}
+
+export default async function SummariesRoute({
+  searchParams,
+}: Readonly<SearchParamsProps>) {
+  const query = searchParams?.query ?? "";
+  const currentPage = Number(searchParams?.page) || 1;
+  const { data, meta } = await getSummaries(query, currentPage);
+  const pageCount = meta.pagination.pageCount;
+
   if (!data) return null;
+
   return (
     <div className="grid grid-cols-1 gap-4 p-4">
+      <Search />
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
         {data.map((item: LinkCardProps) => (
           <LinkCard key={item.id} {...item} />
         ))}
       </div>
+
+      <PaginationComponent pageCount={pageCount} />
     </div>
   );
 }
